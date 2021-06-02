@@ -88,4 +88,7 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         sb.append('}');
         return sb.toString();
     }
+
+
+
 }
