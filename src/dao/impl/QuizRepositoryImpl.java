@@ -3,8 +3,6 @@ package dao.impl;
 import dao.QuizRepository;
 import model.Quiz;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,6 +11,10 @@ import java.util.stream.Stream;
 public class QuizRepositoryImpl extends RepositoryMemoryImpl<Long, Quiz> implements
         QuizRepository {
 
+
+    public QuizRepositoryImpl(LongKeyGenerator longKeyGenerator) {
+        super(longKeyGenerator);
+    }
 
     @Override
     public List<Quiz> findByDuration(int expectedDuration) {

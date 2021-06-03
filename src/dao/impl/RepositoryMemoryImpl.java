@@ -20,6 +20,9 @@ public class RepositoryMemoryImpl<K, V extends Identifiable<K>> implements Repos
     public RepositoryMemoryImpl() {
         }
 
+    public RepositoryMemoryImpl(KeyGenerator<K> keyGenerator) {
+        this.keyGenerator = keyGenerator;
+    }
 
     @Override
     public List<V> findAll() {

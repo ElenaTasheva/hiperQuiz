@@ -101,22 +101,29 @@ public class User extends BaseEntity<Long, User> {
         this.quizzes = quizzes;
     }
 
+//    @Override
+//    public String toString() {
+//        final StringBuilder sb = new StringBuilder("User{");
+//        sb.append("created=").append(getCreated());
+//        sb.append(", id=").append(getId());
+//        sb.append(", username='").append(username).append('\'');
+//        sb.append(", email='").append(email).append('\'');
+//        sb.append(", password='").append(password).append('\'');
+//        sb.append(", gender=").append(gender);
+//        sb.append(", role=").append(role);
+//        sb.append(", picture='").append(picture).append('\'');
+//        sb.append(", description='").append(description).append('\'');
+//        sb.append(", metadata='").append(metadata).append('\'');
+//        sb.append(", status=").append(status);
+//        sb.append(", quizzes=").append(quizzes);
+//        sb.append('}');
+//        return sb.toString();
+//    }
+
+
+    // only for presentation purpose (report)
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
-        sb.append("created=").append(getCreated());
-        sb.append(", id=").append(getId());
-        sb.append(", username='").append(username).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", gender=").append(gender);
-        sb.append(", role=").append(role);
-        sb.append(", picture='").append(picture).append('\'');
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", metadata='").append(metadata).append('\'');
-        sb.append(", status=").append(status);
-        sb.append(", quizzes=").append(quizzes);
-        sb.append('}');
-        return sb.toString();
+      return username;
     }
 }
