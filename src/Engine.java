@@ -45,9 +45,20 @@ public class Engine implements Runnable{
         switch (exNumber) {
             case 1:
                 String username;
-                System.out.println("Please create a profile to submit the quiz: ");
+                System.out.println("Please create a profile to submit the quiz. If you already have a profile type 'yes' ");
+                username = scanner.nextLine();
+
+                if(username.equals("yes")){
+                    // todo make the method in the repo
+                    User userExist = findUserByUserName();
+
+                    //doing it assuming credentials are correct
+                     createTest(userExist);
+                    // todo check if user is found
+
+                }
                 System.out.println("Please enter a valid username: (Username must be between 2 and 15 characters long.");
-                 username = scanner.nextLine();
+
                 while (!ValidationUtil.validateString(username, 2, 15)){
                     System.out.println("The username you enter is not valid. Please try again");
                     username = scanner.nextLine();
@@ -81,6 +92,13 @@ public class Engine implements Runnable{
                 Quiz quiz = createTest(user);
                 user.getQuizzes().add(quiz);
                 System.out.println("Your first quiz was created");
+                break;
+            case 2:
+                User user1 = findUserByUserName();
+                createTest(user1);
+                break;
+
+
 
 
 
@@ -88,7 +106,16 @@ public class Engine implements Runnable{
 
                 }
 
-                // add exit number
+    private User findUserByUserName() {
+        System.out.println("Please enter your username");
+        String username = scanner.nextLine();
+
+
+        return  (User) userRepository.findAll().stream().filter(user1 -> user1.getUsername().equals(username))
+                .limit(1);
+    }
+
+    // add exit number
     private Quiz createTest(User user) {
         Quiz quiz = null;
         System.out.println("Please enter a valid quiz title (Title must be between 2 and 80 characters");
