@@ -39,9 +39,9 @@ public class Main {
                 new PrintUtil.ColumnDescriptor("id", "ID", 5, CENTER),
                 new PrintUtil.ColumnDescriptor("title", "Title", 5, LEFT),
                 new PrintUtil.ColumnDescriptor("author", "Author", 12, LEFT),
-                new PrintUtil.ColumnDescriptor("description", "Description", 12, LEFT),
+                new PrintUtil.ColumnDescriptor("description", "Description", 20, LEFT),
                 new PrintUtil.ColumnDescriptor("expectedDuration", "Duration", 8, RIGHT, 2),
-                new PrintUtil.ColumnDescriptor("URL", "Picture URL", 5, CENTER)
+                new PrintUtil.ColumnDescriptor("URL", "Picture URL", 11, CENTER)
         ));
 
         quizColumns.addAll(metadataColumns);
