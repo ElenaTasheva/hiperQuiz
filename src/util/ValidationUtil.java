@@ -29,16 +29,14 @@ public class ValidationUtil {
         }
     }
 
-    public static boolean validateGender(User user, String s) {
+    public static Gender validateGender(String s) {
         String upper=s.toUpperCase(Locale.ROOT);
         if (upper.equals("M")|| upper.equals("MALE")) {
-            user.setGender(Gender.MALE);
-            return true;
+            return Gender.MALE;
         } else if(upper.equals("F")||upper.equals("FEMALE")){
-            user.setGender(Gender.FEMALE);
-            return true;
+            return Gender.FEMALE;
         } else{
-            return false;
+            return null;
         }
     }
 

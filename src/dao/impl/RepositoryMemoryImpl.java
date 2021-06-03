@@ -17,8 +17,7 @@ public class RepositoryMemoryImpl<K, V extends Identifiable<K>> implements Repos
     private KeyGenerator<K> keyGenerator;
 
 
-    public RepositoryMemoryImpl() {
-        }
+
 
     public RepositoryMemoryImpl(KeyGenerator<K> keyGenerator) {
         this.keyGenerator = keyGenerator;

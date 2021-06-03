@@ -7,6 +7,7 @@ import model.Answer;
 import model.Question;
 import model.Quiz;
 import model.User;
+import model.enums.Gender;
 import util.ValidationUtil;
 
 import java.io.*;
@@ -23,7 +24,7 @@ public class Engine implements Runnable{
     public Engine() {
         scanner = new Scanner(System.in);
         this.quizRepository = new QuizRepositoryImpl(new LongKeyGenerator());
-        this.userRepository = new UserRepositoryImpl();
+        this.userRepository = new UserRepositoryImpl(new LongKeyGenerator());
     }
 
 
@@ -66,68 +67,80 @@ public class Engine implements Runnable{
                 }
                 User user = new User(username, email, password);
                 System.out.println("Please enter your gender: (type male or female)");
-                String gender = scanner.nextLine();
-                while(!ValidationUtil.validateGender(user,gender)){
+                Gender gender = ValidationUtil.validateGender(scanner.nextLine());
+                while(gender == null){
                     System.out.println("Invalid data. Please try again");
-                    gender = scanner.nextLine();
+                    gender = ValidationUtil.validateGender(scanner.nextLine());
                 }
+                user.setGender(gender);
                 userRepository.create(user);
                 Long userID = user.getId();
 
 
                 System.out.println("~~~Congratulations your profile was created successfully~~~");
-                System.out.println("Please enter a valid quiz title (Title must be between 2 and 80 characters");
-                String title = scanner.nextLine();
-                while(!ValidationUtil.validateString(title, 2, 80)){
-                    System.out.println("Please try again");
-                    title = scanner.nextLine();
-                }
-                // changing the requirements for the demo (20 and 250 constrains)
-                System.out.println("Please enter a valid quiz description (Title must be 2 and 80  characters");
-                String description = scanner.nextLine();
-                while(!ValidationUtil.validateString(description, 2, 80)){
-                    System.out.println("Please try again");
-                    description = scanner.nextLine();
-                }
-
-                Quiz quiz = new Quiz(title, description);
-                quiz.setAuthor(user);
-                System.out.println("Please start entering questions.\n If you want to exit type 1");
-                String input = scanner.nextLine();
-                while (!input.equals("1")){
-                    while (!ValidationUtil.validateString(input, 10, 30)){
-                        System.out.println("Questions minimum length is 10, max 30. Try again");
-                        input = scanner.nextLine();
-                    }
-                    Question question = new Question(input);
-                    System.out.println("Please enter a valid answer for your question");
-                    String answer = scanner.nextLine();
-                    while (!ValidationUtil.validateString(answer, 2, 150)){
-                        System.out.println("Answer minimum length is 2, max 150. Try again");
-                        answer = scanner.nextLine();
-                    }
-                    Answer answer1 = new Answer(answer);
-                    System.out.println("Please enter how many points does the answer give.");
-                    String points = scanner.nextLine();
-                    while (!ValidationUtil.validateInt(points)) {
-                        System.out.println("Invalid number. Try again");
-                        points = scanner.nextLine();
-                    }
-                    answer1.setScore(Integer.parseInt(points));
-                    // todo check if we want uni or bi directional
-                }
-
-        }
-
-                }
-
-
-
-
+                Quiz quiz = createTest(user);
+                user.getQuizzes().add(quiz);
+                System.out.println("Your first quiz was created");
 
 
 
         }
+
+                }
+
+                // add exit number
+    private Quiz createTest(User user) {
+        Quiz quiz = null;
+        System.out.println("Please enter a valid quiz title (Title must be between 2 and 80 characters");
+        String title = scanner.nextLine();
+        while(!ValidationUtil.validateString(title, 2, 80)){
+            System.out.println("Please try again");
+            title = scanner.nextLine();
+        }
+        // changing the requirements for the demo (20 and 250 constrains)
+        System.out.println("Please enter a valid quiz description (Title must be 2 and 80  characters");
+        String description = scanner.nextLine();
+        while(!ValidationUtil.validateString(description, 2, 80)){
+            System.out.println("Please try again");
+            description = scanner.nextLine();
+        }
+
+        quiz = new Quiz(title, description);
+        quiz.setAuthor(user);
+        System.out.println("Please start entering questions.\n If you want to exit type 1");
+        String input = scanner.nextLine();
+        while (!input.equals("1")){
+            while (!ValidationUtil.validateString(input, 10, 30)){
+                System.out.println("Questions minimum length is 10, max 30. Try again");
+                input = scanner.nextLine();
+            }
+            Question question = new Question(input);
+            System.out.println("Please enter a valid answer for your question");
+            String answer = scanner.nextLine();
+            while (!ValidationUtil.validateString(answer, 2, 150)){
+                System.out.println("Answer minimum length is 2, max 150. Try again");
+                answer = scanner.nextLine();
+            }
+            Answer answer1 = new Answer(answer);
+            System.out.println("Please enter how many points does the answer give.");
+            String points = scanner.nextLine();
+            while (!ValidationUtil.validateInt(points)) {
+                System.out.println("Invalid number. Try again");
+                points = scanner.nextLine();
+            }
+            answer1.setScore(Integer.parseInt(points));
+            // todo check if we want uni or bi directional
+            answer1.setQuestion(question);
+            // todo make a separate methods
+            question.getAnswers().add(answer1);
+            quiz.getQuestions().add(question);
+            input = scanner.nextLine();
+        }
+        return quiz;
+    }
+
+
+}
 
 
 
