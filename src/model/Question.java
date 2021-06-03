@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question extends BaseEntity<Long, Question> {
@@ -9,7 +10,9 @@ public class Question extends BaseEntity<Long, Question> {
     private String picture; //(optional) - if the Question includes picture, valid URL;
     private List<Answer> answers; //list of Answer entities for the Question;
 
-    public Question() {
+    public Question(String s) {
+        this.answers = new ArrayList<>();
+        this.text = s;
     }
 
     public Quiz getQuiz() {
@@ -42,5 +45,13 @@ public class Question extends BaseEntity<Long, Question> {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    // to string for quiz representation
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Question{");
+        sb.append(text);
+        return sb.toString();
     }
 }

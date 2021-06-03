@@ -10,6 +10,10 @@ public class Answer extends BaseEntity<Long, Answer> {
     public Answer() {
     }
 
+    public Answer(String text) {
+        this.text = text;
+    }
+
     public Question getQuestion() {
         return question;
     }
@@ -40,5 +44,12 @@ public class Answer extends BaseEntity<Long, Answer> {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Answer{");
+        sb.append(text);
+        return sb.toString();
     }
 }

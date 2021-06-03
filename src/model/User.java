@@ -3,6 +3,7 @@ package model;
 import model.enums.Gender;
 import model.enums.Role;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User extends BaseEntity<Long, User> {
@@ -16,9 +17,16 @@ public class User extends BaseEntity<Long, User> {
     private String description;
     private String metadata;
     private boolean status;
-    private List<Quiz> quizzes;
+    private List<Quiz> quizzes = new ArrayList<>();
 
     public User() {
+
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public String getUsername() {

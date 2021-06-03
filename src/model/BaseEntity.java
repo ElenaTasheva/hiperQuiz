@@ -72,5 +72,7 @@ public abstract class BaseEntity<K extends Comparable<K>, V extends Identifiable
     public void setId(K id) {
         this.id = id;
     }
+
+
 }
 
