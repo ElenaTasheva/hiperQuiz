@@ -123,7 +123,7 @@ public class Engine implements Runnable{
                             String userInput = "";
                             List<Question> questions = quizToPlay.getQuestions();
                             QuizResult quizResult = createAQuizResultForTheChosenQuiz(userPlaying, quizToPlay);
-
+                            userPlaying.getResults().add(quizResult);
 
                             while (!userInput.equals("0")) {
                                 for (Question question : questions) {
@@ -139,8 +139,7 @@ public class Engine implements Runnable{
                                         System.out.println(":( May be next time");
                                     }
                                 }
-                                System.out.printf("Thank you for playing.\n Your score is %s", userPlaying.getOverallScore());
-                                System.out.println();
+                                System.out.printf("Thank you for playing.\n Your score is %s", quizResult.getScore());
 
 
                             }

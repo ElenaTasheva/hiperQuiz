@@ -36,5 +36,11 @@ public class Player extends User {
         return rank;
     }
 
+    public List<QuizResult> getResults() {
+        return results;
+    }
 
+    public void setResults(List<QuizResult> results) {
+        this.results = results;
+    }
 }
