@@ -10,6 +10,11 @@ public class QuizResult extends BaseEntity<Long, QuizResult> {
     public QuizResult() {
     }
 
+    public QuizResult(Player player, Quiz quiz) {
+        this.player = player;
+        this.quiz = quiz;
+    }
+
     public Player getPlayer() {
         return player;
     }
@@ -30,9 +35,10 @@ public class QuizResult extends BaseEntity<Long, QuizResult> {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+   public void calculateScore(Answer answer){
+         score += answer.getScore();
+   }
+
 
     @Override
     public String toString() {
@@ -45,4 +51,6 @@ public class QuizResult extends BaseEntity<Long, QuizResult> {
         sb.append('}');
         return sb.toString();
     }
+
+
 }

@@ -50,8 +50,8 @@ public class Question extends BaseEntity<Long, Question> {
     // to string for quiz representation
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Question{");
-        sb.append(text);
+        final StringBuilder sb = new StringBuilder();
+        sb.append(text + "?");
         return sb.toString();
     }
 }

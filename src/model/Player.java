@@ -5,17 +5,36 @@ import model.enums.Rank;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends User{
+public class Player extends User {
 
-    // todo transform to Rank enum, using a formula chosen by me, only getter
-    private List<QuizResult> results;
+    private List<QuizResult> results = new ArrayList<>();
     private int overallScore;
     private Rank rank;
 
-    public Player() {
-        this.results = new ArrayList<>();
+    public Player(String username) {
+        super(username);
     }
 
+
+
+
+    public int getOverallScore() {
+        for (QuizResult result : results) {
+            this.overallScore += result.getScore();
+        }
+        return overallScore;
+    }
+
+    public Rank getRank() {
+        if (overallScore < 50) {
+            rank = Rank.JUNIOR;
+        } else if (overallScore > 50 && overallScore < 100) {
+            rank = Rank.MID;
+        } else {
+            rank = Rank.MASTER;
+        }
+        return rank;
+    }
 
 
 }
